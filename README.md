@@ -39,3 +39,6 @@ each number and sign used; the extraction of the hand involves the contour and c
 defects. Convexity defect gives an issue on how to calculate the depth of the defects. Some of
 the defects have far greater depth than others so to identify the depth would include some
 equations
+
+![Screenshot (56)](https://user-images.githubusercontent.com/125593872/235828583-d525f143-d5fc-4109-b208-9a31e312789b.png)
+
