@@ -1,309 +1,107 @@
-import cv2
-import numpy as np
-import os
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Create the directory structure
-if not os.path.exists("data"):
-    os.makedirs("data")
-    os.makedirs("data/train")
-    os.makedirs("data/test")
-    os.makedirs("data/train/0")
-    os.makedirs("data/train/1")
-    os.makedirs("data/train/2")
-    os.makedirs("data/train/3")
-    os.makedirs("data/train/4")
-    os.makedirs("data/train/5")
-    os.makedirs("data/train/6")
-    os.makedirs("data/train/7")
-    os.makedirs("data/train/8")
-    os.makedirs("data/train/9")
-    os.makedirs("data/test/0")
-    os.makedirs("data/test/1")
-    os.makedirs("data/test/2")
-    os.makedirs("data/test/3")
-    os.makedirs("data/test/4")
-    os.makedirs("data/test/5")
-    os.makedirs("data/test/6")
-    os.makedirs("data/test/7")
-    os.makedirs("data/test/8")
-    os.makedirs("data/test/9")
-   
-    
+# C extensions
+*.so
 
-# Train or test 
-mode = 'test'#for collecting the training data
-directory = 'data/'+mode+'/'
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-cap = cv2.VideoCapture(0)#0 corresponds to my webcam
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
 
-while True:
-    _, frame = cap.read()
-    # Simulating mirror image
-    frame = cv2.flip(frame, 1)
-    
-    # Getting count of existing images dictionary
-    count = {'zero': len(os.listdir(directory+"/0")),
-             'one': len(os.listdir(directory+"/1")),
-             'two': len(os.listdir(directory+"/2")),
-             'three': len(os.listdir(directory+"/3")),
-             'four': len(os.listdir(directory+"/4")),
-             'five': len(os.listdir(directory+"/5")),
-             'six': len(os.listdir(directory+"/6")),
-             'seven': len(os.listdir(directory+"/7")),
-             'eight': len(os.listdir(directory+"/8")),
-             'nine': len(os.listdir(directory+"/9")),
-             'ten': len(os.listdir(directory+"/10")),
-             'a': len(os.listdir(directory+"/a")),
-            'b': len(os.listdir(directory+"/b")),
-            'c': len(os.listdir(directory+"/c")),
-            'd': len(os.listdir(directory+"/d")),
-            'e': len(os.listdir(directory+"/e")),
-            'f': len(os.listdir(directory+"/f")),
-            'g': len(os.listdir(directory+"/g"))}
-                         
-    
-    # Printing the count in each set to the screen
-    cv2.putText(frame, "MODE : "+mode, (10, 50), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "IMAGE COUNT", (10, 100), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "ZERO : "+str(count['zero']), (10, 120), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "ONE : "+str(count['one']), (10, 140), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "TWO : "+str(count['two']), (10, 160), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "THREE : "+str(count['three']), (10, 180), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "FOUR : "+str(count['four']), (10, 200), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "FIVE : "+str(count['five']), (10, 220), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "SIX : "+str(count['six']), (10, 240), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "SEVEN : "+str(count['seven']), (10, 260), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "EIGHT : "+str(count['eight']), (10, 280), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "NINE : "+str(count['nine']), (10, 300), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "TEN : "+str(count['ten']), (10, 320), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "A : "+str(count['a']), (10, 340), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "B : "+str(count['b']), (10, 360), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "C : "+str(count['c']), (10, 380), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "D : "+str(count['d']), (10, 400), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "E : "+str(count['e']), (10, 420), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "F : "+str(count['f']), (10, 440), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    cv2.putText(frame, "G : "+str(count['g']), (10, 460), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-   
-   
-    # Coordinates of the ROI
-    x1 = int(0.5*frame.shape[1])
-    y1 = 10
-    x2 = frame.shape[1]-10
-    y2 = int(0.5*frame.shape[1])
-    # Drawing the ROI
-    # The increment/decrement by 1 is to compensate for the bounding box
-    cv2.rectangle(frame, (x1-1, y1-1), (x2+1, y2+1), (255,0,0) ,1)
-    # Extracting the ROI
-    roi = frame[y1:y2, x1:x2]
-    roi = cv2.resize(roi, (64, 64)) #resizing into 64x64
- 
-    cv2.imshow("Frame", frame)
-    
-    #_, mask = cv2.threshold(mask, 200, 255, cv2.THRESH_BINARY)
-    #kernel = np.ones((1, 1), np.uint8)
-    #img = cv2.dilate(mask, kernel, iterations=1)
-    #img = cv2.erode(mask, kernel, iterations=1)
-    # do the processing after capturing the image!
-    roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)#conversion into black and white
-    _, roi = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
-    cv2.imshow("ROI", roi)
-    
-    interrupt = cv2.waitKey(10)
-    if interrupt & 0xFF == 27: # esc key
-        break
-    if interrupt & 0xFF == ord('0'):
-        cv2.imwrite(directory+'0/'+str(count['zero'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('1'):
-        cv2.imwrite(directory+'1/'+str(count['one'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('2'):
-        cv2.imwrite(directory+'2/'+str(count['two'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('3'):
-        cv2.imwrite(directory+'3/'+str(count['three'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('4'):
-        cv2.imwrite(directory+'4/'+str(count['four'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('5'):
-        cv2.imwrite(directory+'5/'+str(count['five'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('6'):
-        cv2.imwrite(directory+'6/'+str(count['six'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('7'):
-        cv2.imwrite(directory+'7/'+str(count['seven'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('8'):
-        cv2.imwrite(directory+'8/'+str(count['eight'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('9'):
-        cv2.imwrite(directory+'9/'+str(count['nine'])+'.jpg', roi)
-    #if interrupt & 0xFF == ord('10'):
-        #cv2.imwrite(directory+'10/'+str(count['ten'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('a'):
-        cv2.imwrite(directory+'a/'+str(count['a'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('b'):
-        cv2.imwrite(directory+'b/'+str(count['b'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('c'):
-        cv2.imwrite(directory+'c/'+str(count['c'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('d'):
-        cv2.imwrite(directory+'d/'+str(count['d'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('e'):
-        cv2.imwrite(directory+'e/'+str(count['e'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('f'):
-        cv2.imwrite(directory+'f/'+str(count['f'])+'.jpg', roi)
-    if interrupt & 0xFF == ord('g'):
-        cv2.imwrite(directory+'g/'+str(count['g'])+'.jpg', roi)
-   
-   
-   
-    
-    
-    
-    
-cap.release()
-cv2.destroyAllWindows()
-"""
-d = "old-data/test/0"
-newd = "data/test/0"
-for walk in os.walk(d):
-    for file in walk[2]:
-        roi = cv2.imread(d+"/"+file)
-        roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-        _, mask = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
-        cv2.imwrite(newd+"/"+file, mask)     
-"""
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-from keras.models import Sequential
-from keras.models import Model
-from keras.layers import Convolution2D
-from keras.layers import MaxPooling2D
-from keras.layers import Flatten
-from keras.layers import Dense
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
 
-# Step 1 - Building the CNN
+# Translations
+*.mo
+*.pot
 
-# Initializing the CNN
-classifier = Sequential()
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
 
-# First convolution layer and pooling
-classifier.add(Convolution2D(32, (3, 3), input_shape=(64, 64, 1), activation='relu'))
-classifier.add(MaxPooling2D(pool_size=(2, 2)))
-# Second convolution layer and pooling
-classifier.add(Convolution2D(32, (3, 3), activation='relu'))
-# input_shape is going to be the pooled feature maps from the previous convolution layer
-classifier.add(MaxPooling2D(pool_size=(2, 2)))
+# Flask stuff:
+instance/
+.webassets-cache
 
-# Flattening the layers
-classifier.add(Flatten())
+# Scrapy stuff:
+.scrapy
 
-# Adding a fully connected layer
-classifier.add(Dense(units=1000, activation='relu'))
-classifier.add(Dense(units=14, activation='softmax')) # softmax for more than 2
+# Sphinx documentation
+docs/_build/
 
-# Compiling the CNN
-classifier.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy']) # categorical_crossentropy for more than 2
+# PyBuilder
+target/
 
+# Jupyter Notebook
+.ipynb_checkpoints
 
-# Step 2 - Preparing the train/test data and training the model
+# pyenv
+.python-version
 
-from keras.preprocessing.image import ImageDataGenerator
+# celery beat schedule file
+celerybeat-schedule
 
-train_datagen = ImageDataGenerator(
-        rescale=1./255,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True)
+# SageMath parsed files
+*.sage.py
 
-test_datagen = ImageDataGenerator(rescale=1./255)
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-training_set = train_datagen.flow_from_directory('data/train',
-                                                 target_size=(64, 64),
-                                                 batch_size=14,
-                                                 color_mode='grayscale',
-                                                 class_mode='categorical')
+# Spyder project settings
+.spyderproject
+.spyproject
 
-test_set = test_datagen.flow_from_directory('data/test',
-                                            target_size=(64, 64),
-                                            batch_size=14,
-                                            color_mode='grayscale',
-                                            class_mode='categorical') 
-classifier.fit(
-        training_set,
-        #steps_per_epoch=1205, # No of images in training set
-        epochs=14,
-        validation_data=test_set)
-        #validation_steps=66)# No of images in test set
+# Rope project settings
+.ropeproject
 
+# mkdocs documentation
+/site
 
-# Saving the model   saves the model and weight
-model_json = classifier.to_json()
-with open("model-bw.json", "w") as json_file:
-    json_file.write(model_json)
-classifier.save_weights('model-bw.h5')
+# mypy
+.mypy_cache/
 
-import numpy as np
-from keras.models import model_from_json
-import operator
-import cv2
-import sys, os
-
-# Loading the model
-json_file = open("model-bw.json", "r")
-model_json = json_file.read()
-json_file.close()
-loaded_model = model_from_json(model_json)
-# load weights into new model
-loaded_model.load_weights("model-bw.h5")
-print("Loaded model from disk")
-
-cap = cv2.VideoCapture(0)
-
-# Category dictionary
-categories = {0: 'ZERO', 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR', 5: 'FIVE',6: 'SIX',7: 'SEVEN',8: 'EIGHT',9: 'NINE',10 : 'A', 11 : 'B',12 : 'C',13 : 'D'}
-
-while True:
-    _, frame = cap.read()
-    # Simulating mirror image
-    frame = cv2.flip(frame, 1)
-    
-    # Got this from collect-data.py
-    # Coordinates of the ROI
-    x1 = int(0.5*frame.shape[1])
-    y1 = 10
-    x2 = frame.shape[1]-10
-    y2 = int(0.5*frame.shape[1])
-    # Drawing the ROI
-    # The increment/decrement by 1 is to compensate for the bounding box
-    cv2.rectangle(frame, (x1-1, y1-1), (x2+1, y2+1), (255,0,0) ,1)
-    # Extracting the ROI
-    roi = frame[y1:y2, x1:x2]
-    
-    # Resizing the ROI so it can be fed to the model for prediction
-    roi = cv2.resize(roi, (64, 64)) 
-    roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-    _, test_image = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
-    cv2.imshow("test", test_image)
-    # Batch of 1
-    result = loaded_model.predict(test_image.reshape(1, 64, 64, 1))
-    prediction = {'ZERO': result[0][0], 
-                  'ONE': result[0][1], 
-                  'TWO': result[0][2],
-                  'THREE': result[0][3],
-                  'FOUR': result[0][4],
-                  'FIVE': result[0][5],
-                  'SIX' : result[0][6],
-                 'SEVEN': result[0][7],
-                 'EIGHT' : result[0][8],
-                 'NINE' : result[0][9],
-                 'A' : result[0][10],
-                 'B' : result[0][11],
-                 'C' : result[0][12],
-                 'D' : result[0][13]}
-    # Sorting based on top prediction
-    prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
-    
-    # Displaying the predictions
-    cv2.putText(frame, prediction[0][0], (10, 120), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)    
-    cv2.imshow("Frame", frame)
-    
-    interrupt = cv2.waitKey(10)
-    if interrupt & 0xFF == 27: # esc key
-        break
-        
- 
-cap.release()
-cv2.destroyAllWindows()
+# the images
+old-data
